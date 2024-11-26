@@ -29,6 +29,8 @@ class TencentEffectPlayerView extends StatefulWidget {
   const TencentEffectPlayerView({
     super.key,
     this.url,
+    this.width,
+    this.height,
     this.playPath,
     this.playAsset,
     this.autoStart = true,
@@ -54,6 +56,12 @@ class TencentEffectPlayerView extends StatefulWidget {
 
   /// 播放资源
   final String? playAsset;
+
+  /// width
+  final double? width;
+
+  /// height
+  final double? height;
 
   /// 自动播放
   final bool autoStart;
@@ -96,6 +104,8 @@ class TencentEffectPlayerView extends StatefulWidget {
 
   const TencentEffectPlayerView.network(
     this.url, {
+    this.width,
+    this.height,
     this.autoStart = true,
     this.isLoop = false,
     this.viewId,
@@ -115,6 +125,8 @@ class TencentEffectPlayerView extends StatefulWidget {
 
   const TencentEffectPlayerView.path(
     this.playPath, {
+    this.width,
+    this.height,
     this.autoStart = true,
     this.isLoop = false,
     this.viewId,
@@ -134,6 +146,8 @@ class TencentEffectPlayerView extends StatefulWidget {
 
   const TencentEffectPlayerView.asset(
     this.playAsset, {
+    this.width,
+    this.height,
     this.autoStart = true,
     this.isLoop = false,
     this.viewId,
@@ -169,21 +183,39 @@ class _TencentEffectPlayerViewState extends State<TencentEffectPlayerView> {
 
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        return AndroidView(
+        final androidView = AndroidView(
           viewType: kViewType,
           creationParams: creationParams,
           layoutDirection: TextDirection.ltr,
           onPlatformViewCreated: _onPlatformViewCreated,
           creationParamsCodec: const StandardMessageCodec(),
         );
+        if (widget.width != null && widget.height != null) {
+          return SizedBox(
+            width: widget.width,
+            height: widget.height,
+            child: androidView,
+          );
+        } else {
+          return androidView;
+        }
       case TargetPlatform.iOS:
-        return UiKitView(
+        final iosView = UiKitView(
           viewType: kViewType,
           layoutDirection: TextDirection.ltr,
           onPlatformViewCreated: _onPlatformViewCreated,
           creationParams: creationParams,
           creationParamsCodec: const StandardMessageCodec(),
         );
+        if (widget.width != null && widget.height != null) {
+          return SizedBox(
+            width: widget.width,
+            height: widget.height,
+            child: iosView,
+          );
+        } else {
+          return iosView;
+        }
       default:
         throw UnsupportedError('Unsupported platform view');
     }
