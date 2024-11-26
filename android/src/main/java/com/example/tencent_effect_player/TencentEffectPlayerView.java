@@ -154,17 +154,23 @@ public class TencentEffectPlayerView implements PlatformView, MethodChannel.Meth
                 break;
             case _methodPlayWithUrl:
                 Log.d("onMethodCall", _methodPlayWithUrl);
-                playUrl = call.argument("url");
+                playUrl = call.argument(_argumentPlayUrl);
+                boolean playerUrlMute = Boolean.TRUE.equals(call.argument(_argumentMute));
+                setMute(playerUrlMute);
                 playWithUrl(playUrl);
                 break;
             case _methodPlayWithPath:
                 Log.d("onMethodCall", _methodPlayWithPath);
-                playPath = call.argument("path");
+                playPath = call.argument(_argumentPlayPath);
+                boolean playerPathMute = Boolean.TRUE.equals(call.argument(_argumentMute));
+                setMute(playerPathMute);
                 playWithPath(playPath);
                 break;
             case _methodPlayWithAsset:
                 Log.d("onMethodCall", _methodPlayWithAsset);
-                playAsset = call.argument("asset");
+                playAsset = call.argument(_argumentPlayAsset);
+                boolean playerAssetMute = Boolean.TRUE.equals(call.argument(_argumentMute));
+                setMute(playerAssetMute);
                 playWithAsset();
                 break;
             case _methodPause:

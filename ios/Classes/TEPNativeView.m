@@ -310,15 +310,7 @@
     } else if ([kCallbackMethodPlayWithUrl isEqualToString:call.method]) {
         [self handlePlayWithUrl:arguments result:result];
     } else if ([kCallbackMethodPlayWithPath isEqualToString:call.method]) {
-        NSString *path = arguments[kMethodArgsKeyResourcePath];
-        if (path != nil && path.length > 0) {
-            [self handlePlayWithPath:path result:result];
-        }else {
-            result(@{
-                kMethodArgsKeyStatus: kMethodArgsValueError,
-                kMethodArgsKeyMessage: @"Path is required"
-            });
-        }
+        [self handlePlayWithPath:arguments result:result];
     } else if ([kCallbackMethodPlayWithAsset isEqualToString:call.method]) {
         [self handlePlayWithAsset:arguments result:result];
     } else if ([kCallbackMethodPause isEqualToString:call.method]) {
@@ -354,12 +346,17 @@
     }];
 }
 
-- (void)handlePlayWithPath:(NSString *)path result:(FlutterResult)result {
-    
-    if (path.length > 0) {
+- (void)handlePlayWithPath:(NSDictionary *)arguments result:(FlutterResult)result {
+    NSString *path = arguments[kMethodArgsKeyResourcePath];
+    // 是否有设置isMute
+    if (arguments[kMethodArgsKeyMute] != nil) {
+        BOOL isMute = [arguments[kMethodArgsKeyMute] boolValue];
+        [self.alphaAnimView setMute:isMute];
+    }
+    if (path != nil && path.length > 0) {
         [self playPath:path isOtherCall:NO];
         result(@{kMethodArgsKeyStatus: kMethodArgsValueSuccess});
-    } else {
+    }else {
         result(@{
             kMethodArgsKeyStatus: kMethodArgsValueError,
             kMethodArgsKeyMessage: @"Path is required"
@@ -369,6 +366,11 @@
 
 - (void)handlePlayWithUrl:(NSDictionary *)arguments result:(FlutterResult)result {
     NSString *url = arguments[kMethodArgsKeyPlayUrl];
+    // 是否有设置isMute
+    if (arguments[kMethodArgsKeyMute] != nil) {
+        BOOL isMute = [arguments[kMethodArgsKeyMute] boolValue];
+        [self.alphaAnimView setMute:isMute];
+    }
     if (url.length > 0) {
         [self playUrl:url];
         result(@{kMethodArgsKeyStatus: kMethodArgsValueSuccess});
@@ -382,6 +384,11 @@
 
 - (void)handlePlayWithAsset:(NSDictionary *)arguments result:(FlutterResult)result {
     NSString *asset = arguments[kMethodArgsKeyAssetName];
+    // 是否有设置isMute
+    if (arguments[kMethodArgsKeyMute] != nil) {
+        BOOL isMute = [arguments[kMethodArgsKeyMute] boolValue];
+        [self.alphaAnimView setMute:isMute];
+    }
     if (asset.length > 0) {
         [self playAsset:asset];
         result(@{kMethodArgsKeyStatus: kMethodArgsValueSuccess});

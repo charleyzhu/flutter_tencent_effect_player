@@ -3,7 +3,7 @@
  * @Date: 2024-11-09 16:25:09
  * @Description: In User Settings Edit
  * @FilePath: /tencent_effect_player/lib/tencent_effect_player_controller.dart
- * @LastEditTime: 2024-11-26 09:54:39
+ * @LastEditTime: 2024-11-26 14:25:51
  * @LastEditors: Charley
  */
 
@@ -16,18 +16,18 @@ class TencentEffectPlayerController {
   final MethodChannel _channel;
 
   /// 播放视频
-  Future<void> playWithUrl({required String url}) async {
-    await _channel.invokeMethod(kCallbackMethodPlayWithUrl, {"url": url});
+  Future<Map<dynamic, dynamic>?> playWithUrl({required String url, bool isMute = false}) async {
+    return _channel.invokeMethod(kCallbackMethodPlayWithUrl, {kMethodArgsKeyPlayUrl: url, "isMute": isMute});
   }
 
   /// 播放路径
-  Future<void> playWithPath({required String path}) async {
-    await _channel.invokeMethod(kCallbackMethodPlayWithPath, {"path": path});
+  Future<Map<dynamic, dynamic>?> playWithPath({required String path, bool isMute = false}) async {
+    return _channel.invokeMethod(kCallbackMethodPlayWithPath, {kMethodArgsKeyPlayPath: path, "isMute": isMute});
   }
 
   /// 播放资源
-  Future<void> playWithAsset({required String asset}) async {
-    await _channel.invokeMethod(kCallbackMethodPlayWithAsset, {"asset": asset});
+  Future<Map<dynamic, dynamic>?> playWithAsset({required String asset, bool isMute = false}) async {
+    return _channel.invokeMethod(kCallbackMethodPlayWithAsset, {kMethodArgsKeyPlayAsset: asset, "isMute": isMute});
   }
 
   ///   暂停播放
