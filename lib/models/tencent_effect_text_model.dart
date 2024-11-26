@@ -31,12 +31,12 @@ class TencentEffectTextModel {
   // to json
   Map<String, dynamic> toJson() {
     Map<String, dynamic> map = {};
-    map[kMethodArgsKeyTag] = tag;
-    map[kMethodArgsKeyText] = text;
-    map[kMethodArgsKeyAlignment] = alignment.value;
-    map[kMethodArgsKeyIsBold] = isBold;
+    map[kTEPMethodArgsKeyTag] = tag;
+    map[kTEPMethodArgsKeyText] = text;
+    map[kTEPMethodArgsKeyAlignment] = alignment.value;
+    map[kTEPMethodArgsKeyIsBold] = isBold;
     if (textColor != null) {
-      map[kMethodArgsKeyTextColor] = textColor;
+      map[kTEPMethodArgsKeyTextColor] = textColor;
     }
     return map;
   }

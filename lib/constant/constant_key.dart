@@ -8,85 +8,85 @@
  */
 
 /// 获取原生SDK版本
-const String kMethodGetSDKVersion = "getSDKVersion";
+const String kTEPMethodGetSDKVersion = "getSDKVersion";
 
 /// 初始化
-const String kMethodInitSDK = "initSDK";
+const String kTEPMethodInitSDK = "initSDK";
 
 /// licenceUrl
-const String kMethodArgsKeyLicenceUrl = "licenceUrl";
+const String kTEPMethodArgsKeyLicenceUrl = "licenceUrl";
 
 /// licenceKey
-const String kMethodArgsKeyLicenceKey = "licenceKey";
+const String kTEPMethodArgsKeyLicenceKey = "licenceKey";
 
 /// isLogEnable
-const String kMethodArgsKeyIsLogEnable = "isLogEnable";
+const String kTEPMethodArgsKeyIsLogEnable = "isLogEnable";
 
 /// 错误码
-const String kMethodArgsKeyErrCode = "errCode";
+const String kTEPMethodArgsKeyErrCode = "errCode";
 
 /// 参数
-const String kMethodArgsKeyParam = "param";
+const String kTEPMethodArgsKeyParam = "param";
 
 /// loopKey
-const String kMethodArgsKeyLoop = "loop";
+const String kTEPMethodArgsKeyLoop = "loop";
 
 /// muteKey
-const String kMethodArgsKeyMute = "mute";
+const String kTEPMethodArgsKeyMute = "mute";
 
 /// status
-const String kMethodArgsKeyStatus = "status";
+const String kTEPMethodArgsKeyStatus = "status";
 
 /// message
-const String kMethodArgsKeyMessage = "message";
+const String kTEPMethodArgsKeyMessage = "message";
 
 /// autoStart
-const String kMethodArgsKeyAutoStart = "autoStart";
+const String kTEPMethodArgsKeyAutoStart = "autoStart";
 
 /// playUrlKey
-const String kMethodArgsKeyPlayUrl = "playUrl";
+const String kTEPMethodArgsKeyPlayUrl = "playUrl";
 
 /// playPath
-const String kMethodArgsKeyPlayPath = "playPath";
+const String kTEPMethodArgsKeyPlayPath = "playPath";
 
 /// playAsset
-const String kMethodArgsKeyPlayAsset = "playAsset";
+const String kTEPMethodArgsKeyPlayAsset = "playAsset";
 
 /// isLoop
-const String kMethodArgsKeyIsLoop = "isLoop";
+const String kTEPMethodArgsKeyIsLoop = "isLoop";
 
 /// viewId
-const String kMethodArgsKeyViewId = "viewId";
+const String kTEPMethodArgsKeyViewId = "viewId";
 
 /// success
-const String kMethodArgsValueSuccess = "success";
+const String kTEPMethodArgsValueSuccess = "success";
 
 /// error
-const String kMethodArgsValueError = "error";
+const String kTEPMethodArgsValueError = "error";
 
 /// tag
-const String kMethodArgsKeyTag = "tag";
+const String kTEPMethodArgsKeyTag = "tag";
 
 /// text
-const String kMethodArgsKeyText = "text";
+const String kTEPMethodArgsKeyText = "text";
 
 /// isBold
-const String kMethodArgsKeyIsBold = "isBold";
+const String kTEPMethodArgsKeyIsBold = "isBold";
 
 /// alignment
-const String kMethodArgsKeyAlignment = "alignment";
+const String kTEPMethodArgsKeyAlignment = "alignment";
 
 /// textColor
-const String kMethodArgsKeyTextColor = "textColor";
+const String kTEPMethodArgsKeyTextColor = "textColor";
 
 /// imageType
-const String kMethodArgsKeyImageType = "imageType";
+const String kTEPMethodArgsKeyImageType = "imageType";
 
 /// imageValue
-const String kMethodArgsKeyImageValue = "imageValue";
+const String kTEPMethodArgsKeyImageValue = "imageValue";
 
 /// tcePlayerError
-const String kMethodArgsKeyTCEPlayerError = "tcePlayerError";
+const String kTEPMethodArgsKeyTCEPlayerError = "tcePlayerError";
 
 /// eventId
-const String kMethodArgsKeyEventId = "eventId";
+const String kTEPMethodArgsKeyEventId = "eventId";

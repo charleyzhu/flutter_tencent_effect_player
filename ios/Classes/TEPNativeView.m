@@ -85,28 +85,28 @@
         self.loadImageCache = [NSMutableDictionary dictionary];
 
         // get args
-        if (args[kMethodArgsKeyAutoStart] != nil) {
-            self.autoStart = [args[kMethodArgsKeyAutoStart] boolValue];
+        if (args[kTEPMethodArgsKeyAutoStart] != nil) {
+            self.autoStart = [args[kTEPMethodArgsKeyAutoStart] boolValue];
         }else {
             self.autoStart = YES;
         }
 
-        if (args[kMethodArgsKeyIsLoop] != nil) {
-            self.isLoop = [args[kMethodArgsKeyIsLoop] boolValue];
+        if (args[kTEPMethodArgsKeyIsLoop] != nil) {
+            self.isLoop = [args[kTEPMethodArgsKeyIsLoop] boolValue];
         } else {
             self.isLoop = NO;
         }
 
-        if (![args[kMethodArgsKeyPlayUrl] isKindOfClass:[NSNull class]]) {
-            self.playUrl = args[kMethodArgsKeyPlayUrl];
+        if (![args[kTEPMethodArgsKeyPlayUrl] isKindOfClass:[NSNull class]]) {
+            self.playUrl = args[kTEPMethodArgsKeyPlayUrl];
         }
         
-        if (![args[kMethodArgsKeyResourcePath] isKindOfClass:[NSNull class]]) {
-            self.resourcePath = args[kMethodArgsKeyResourcePath];
+        if (![args[kTEPMethodArgsKeyResourcePath] isKindOfClass:[NSNull class]]) {
+            self.resourcePath = args[kTEPMethodArgsKeyResourcePath];
         }
         
-        if (![args[kMethodArgsKeyAssetName] isKindOfClass:[NSNull class]]) {
-            self.assetName = args[kMethodArgsKeyAssetName];
+        if (![args[kTEPMethodArgsKeyAssetName] isKindOfClass:[NSNull class]]) {
+            self.assetName = args[kTEPMethodArgsKeyAssetName];
         }
 
         // 初始化视图
@@ -214,9 +214,9 @@
     // 加载普通文本缓存
     dispatch_group_enter(group);
     NSDictionary *args = @{
-        kMethodArgsKeyViewId: self.viewId
+        kTEPMethodArgsKeyViewId: self.viewId
     };
-    [self.methodChannel invokeMethod:kCallbackMethodTextContentForPlayer
+    [self.methodChannel invokeMethod:kTEPCallbackMethodTextContentForPlayer
                          arguments:args 
                            result:^(id _Nullable result) {
         dispatch_async(queue, ^{
@@ -225,7 +225,7 @@
                 NSArray<NSDictionary *> *textList = result;
                 if (textList != nil && textList.count > 0) {
                     for (NSDictionary *textInfo in textList) {
-                        self.textContentCache[textInfo[kMethodArgsKeyTag]] = textInfo[kMethodArgsKeyText];
+                        self.textContentCache[textInfo[kTEPMethodArgsKeyTag]] = textInfo[kTEPMethodArgsKeyText];
                     }
                 }
             } 
@@ -235,7 +235,7 @@
 
     // 加载特效文本缓存
     dispatch_group_enter(group);
-    [self.methodChannel invokeMethod:kCallbackMethodLoadTextForPlayer
+    [self.methodChannel invokeMethod:kTEPCallbackMethodLoadTextForPlayer
                          arguments:args 
                            result:^(id _Nullable result) {
         dispatch_async(queue, ^{
@@ -244,11 +244,11 @@
                 NSArray<NSDictionary *> *textList = result;
                 if (textList != nil && textList.count > 0) {
                     for (NSDictionary *textInfo  in textList) {
-                        NSString *tag = textInfo[kMethodArgsKeyTag];
-                        NSString *text = textInfo[kMethodArgsKeyText];
-                        BOOL isBold = [textInfo[kMethodArgsKeyIsBold] boolValue];
-                        NSNumber *alignmentNumber = textInfo[kMethodArgsKeyAlignment];
-                        NSString *colorStr = textInfo[kMethodArgsKeyTextColor];
+                        NSString *tag = textInfo[kTEPMethodArgsKeyTag];
+                        NSString *text = textInfo[kTEPMethodArgsKeyText];
+                        BOOL isBold = [textInfo[kTEPMethodArgsKeyIsBold] boolValue];
+                        NSNumber *alignmentNumber = textInfo[kTEPMethodArgsKeyAlignment];
+                        NSString *colorStr = textInfo[kTEPMethodArgsKeyTextColor];
                        
                         TCEffectText *tcText = [[TCEffectText alloc] init];
                         tcText.text = text;
@@ -275,7 +275,7 @@
 
     // 加载图片缓存
     dispatch_group_enter(group);
-    [self.methodChannel invokeMethod:kCallbackMethodLoadImageForPlayer
+    [self.methodChannel invokeMethod:kTEPCallbackMethodLoadImageForPlayer
                          arguments:args 
                            result:^(id _Nullable result) {
         dispatch_async(queue, ^{
@@ -284,7 +284,7 @@
                 NSArray<NSDictionary *> *imageList = result;
                 if (imageList != nil && imageList.count > 0) {
                     for (NSDictionary *imageInfo in imageList) {
-                        NSString *tag = imageInfo[kMethodArgsKeyTag];
+                        NSString *tag = imageInfo[kTEPMethodArgsKeyTag];
                         self.loadImageCache[tag] = imageInfo;
                     }
                 }
@@ -305,23 +305,23 @@
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
     NSDictionary *arguments = call.arguments;
-    if ([kCallbackMethodInitPlayerView isEqualToString:call.method]) {
+    if ([kTEPCallbackMethodInitPlayerView isEqualToString:call.method]) {
         [self handleInitPlayerView:arguments result:result];
-    } else if ([kCallbackMethodPlayWithUrl isEqualToString:call.method]) {
+    } else if ([kTEPCallbackMethodPlayWithUrl isEqualToString:call.method]) {
         [self handlePlayWithUrl:arguments result:result];
-    } else if ([kCallbackMethodPlayWithPath isEqualToString:call.method]) {
+    } else if ([kTEPCallbackMethodPlayWithPath isEqualToString:call.method]) {
         [self handlePlayWithPath:arguments result:result];
-    } else if ([kCallbackMethodPlayWithAsset isEqualToString:call.method]) {
+    } else if ([kTEPCallbackMethodPlayWithAsset isEqualToString:call.method]) {
         [self handlePlayWithAsset:arguments result:result];
-    } else if ([kCallbackMethodPause isEqualToString:call.method]) {
+    } else if ([kTEPCallbackMethodPause isEqualToString:call.method]) {
         [self handlePause:result];
-    } else if ([kCallbackMethodResume isEqualToString:call.method]) {
+    } else if ([kTEPCallbackMethodResume isEqualToString:call.method]) {
         [self handleResume:result];
-    } else if ([kCallbackMethodStop isEqualToString:call.method]) {
+    } else if ([kTEPCallbackMethodStop isEqualToString:call.method]) {
         [self handleStop:result];
-    } else if ([kCallbackMethodSetMute isEqualToString:call.method]) {
+    } else if ([kTEPCallbackMethodSetMute isEqualToString:call.method]) {
         [self handleSetMute:arguments result:result];
-    } else if ([kCallbackMethodSetLoop isEqualToString:call.method]) {
+    } else if ([kTEPCallbackMethodSetLoop isEqualToString:call.method]) {
         [self handleSetLoop:arguments result:result];
     } else {
         result(FlutterMethodNotImplemented);
@@ -347,96 +347,96 @@
 }
 
 - (void)handlePlayWithPath:(NSDictionary *)arguments result:(FlutterResult)result {
-    NSString *path = arguments[kMethodArgsKeyResourcePath];
+    NSString *path = arguments[kTEPMethodArgsKeyResourcePath];
     // 是否有设置isMute
-    if (arguments[kMethodArgsKeyMute] != nil) {
-        BOOL isMute = [arguments[kMethodArgsKeyMute] boolValue];
+    if (arguments[kTEPMethodArgsKeyMute] != nil) {
+        BOOL isMute = [arguments[kTEPMethodArgsKeyMute] boolValue];
         [self.alphaAnimView setMute:isMute];
     }
     if (path != nil && path.length > 0) {
         [self playPath:path isOtherCall:NO];
-        result(@{kMethodArgsKeyStatus: kMethodArgsValueSuccess});
+        result(@{kTEPMethodArgsKeyStatus: kTEPMethodArgsValueSuccess});
     }else {
         result(@{
-            kMethodArgsKeyStatus: kMethodArgsValueError,
-            kMethodArgsKeyMessage: @"Path is required"
+            kTEPMethodArgsKeyStatus: kTEPMethodArgsValueError,
+            kTEPMethodArgsKeyMessage: @"Path is required"
         });
     }
 }
 
 - (void)handlePlayWithUrl:(NSDictionary *)arguments result:(FlutterResult)result {
-    NSString *url = arguments[kMethodArgsKeyPlayUrl];
+    NSString *url = arguments[kTEPMethodArgsKeyPlayUrl];
     // 是否有设置isMute
-    if (arguments[kMethodArgsKeyMute] != nil) {
-        BOOL isMute = [arguments[kMethodArgsKeyMute] boolValue];
+    if (arguments[kTEPMethodArgsKeyMute] != nil) {
+        BOOL isMute = [arguments[kTEPMethodArgsKeyMute] boolValue];
         [self.alphaAnimView setMute:isMute];
     }
     if (url.length > 0) {
         [self playUrl:url];
-        result(@{kMethodArgsKeyStatus: kMethodArgsValueSuccess});
+        result(@{kTEPMethodArgsKeyStatus: kTEPMethodArgsValueSuccess});
     } else {
         result(@{
-            kMethodArgsKeyStatus: kMethodArgsValueError,
-            kMethodArgsKeyMessage: @"URL is required"
+            kTEPMethodArgsKeyStatus: kTEPMethodArgsValueError,
+            kTEPMethodArgsKeyMessage: @"URL is required"
         });
     }
 }
 
 - (void)handlePlayWithAsset:(NSDictionary *)arguments result:(FlutterResult)result {
-    NSString *asset = arguments[kMethodArgsKeyAssetName];
+    NSString *asset = arguments[kTEPMethodArgsKeyAssetName];
     // 是否有设置isMute
-    if (arguments[kMethodArgsKeyMute] != nil) {
-        BOOL isMute = [arguments[kMethodArgsKeyMute] boolValue];
+    if (arguments[kTEPMethodArgsKeyMute] != nil) {
+        BOOL isMute = [arguments[kTEPMethodArgsKeyMute] boolValue];
         [self.alphaAnimView setMute:isMute];
     }
     if (asset.length > 0) {
         [self playAsset:asset];
-        result(@{kMethodArgsKeyStatus: kMethodArgsValueSuccess});
+        result(@{kTEPMethodArgsKeyStatus: kTEPMethodArgsValueSuccess});
     } else {
         result(@{
-            kMethodArgsKeyStatus: kMethodArgsValueError,
-            kMethodArgsKeyMessage: @"Asset is required"
+            kTEPMethodArgsKeyStatus: kTEPMethodArgsValueError,
+            kTEPMethodArgsKeyMessage: @"Asset is required"
         });
     }
 }
 
 - (void)handlePause:(FlutterResult)result {
     [self.alphaAnimView pause];
-    result(@{kMethodArgsKeyStatus: kMethodArgsValueSuccess});
+    result(@{kTEPMethodArgsKeyStatus: kTEPMethodArgsValueSuccess});
 }
 
 - (void)handleResume:(FlutterResult)result {
     [self.alphaAnimView resume];
-    result(@{kMethodArgsKeyStatus: kMethodArgsValueSuccess});
+    result(@{kTEPMethodArgsKeyStatus: kTEPMethodArgsValueSuccess});
 }
 
 - (void)handleStop:(FlutterResult)result {
     [self.alphaAnimView stopPlay];
-    result(@{kMethodArgsKeyStatus: kMethodArgsValueSuccess});
+    result(@{kTEPMethodArgsKeyStatus: kTEPMethodArgsValueSuccess});
 }
 
 - (void)handleSetMute:(NSDictionary *)arguments result:(FlutterResult)result {
-    NSNumber *muteValue = arguments[kMethodArgsKeyMute];
+    NSNumber *muteValue = arguments[kTEPMethodArgsKeyMute];
     if (muteValue != nil) {
         [self.alphaAnimView setMute:muteValue.boolValue];
-        result(@{kMethodArgsKeyStatus: kMethodArgsValueSuccess});
+        result(@{kTEPMethodArgsKeyStatus: kTEPMethodArgsValueSuccess});
     } else {
         result(@{
-            kMethodArgsKeyStatus: kMethodArgsValueError,
-            kMethodArgsKeyMessage: @"Mute value is required"
+            kTEPMethodArgsKeyStatus: kTEPMethodArgsValueError,
+            kTEPMethodArgsKeyMessage: @"Mute value is required"
         });
     }
 }
 
 - (void)handleSetLoop:(NSDictionary *)arguments result:(FlutterResult)result {
-    NSNumber *loopValue = arguments[kMethodArgsKeyLoop];
+    NSNumber *loopValue = arguments[kTEPMethodArgsKeyLoop];
     if (loopValue != nil) {
         [self.alphaAnimView setLoop:loopValue.boolValue];
-        result(@{kMethodArgsKeyStatus: kMethodArgsValueSuccess});
+        result(@{kTEPMethodArgsKeyStatus: kTEPMethodArgsValueSuccess});
     } else {
         result(@{
-            kMethodArgsKeyStatus: kMethodArgsValueError,
-            kMethodArgsKeyMessage: @"Loop value is required"
+            kTEPMethodArgsKeyStatus: kTEPMethodArgsValueError,
+            kTEPMethodArgsKeyMessage: @"Loop value is required"
         });
     }
 }
@@ -495,25 +495,25 @@
         };
         
         NSMutableDictionary *tmpArgs = [[NSMutableDictionary alloc]init];
-        tmpArgs[kMethodArgsKeyViewId] = self.viewId;
-        tmpArgs[kMethodArgsKeyEventId] = @(EvtID);
-        tmpArgs[kMethodArgsKeyParam] = @{@"alphaAnimConfig":[[NSDictionary alloc] initWithDictionary:configDict]};
+        tmpArgs[kTEPMethodArgsKeyViewId] = self.viewId;
+        tmpArgs[kTEPMethodArgsKeyEventId] = @(EvtID);
+        tmpArgs[kTEPMethodArgsKeyParam] = @{@"alphaAnimConfig":[[NSDictionary alloc] initWithDictionary:configDict]};
 
         NSDictionary *args = [NSDictionary dictionaryWithDictionary:tmpArgs];
         
-        [self.methodChannel invokeMethod:kCallbackMethodTCEffectAnimViewEvent
+        [self.methodChannel invokeMethod:kTEPCallbackMethodTCEffectAnimViewEvent
                                arguments:args];
     }else {
         NSMutableDictionary *tmpArgs = [[NSMutableDictionary alloc]init];
-        tmpArgs[kMethodArgsKeyViewId] = self.viewId;
-        tmpArgs[kMethodArgsKeyEventId] = @(EvtID);
+        tmpArgs[kTEPMethodArgsKeyViewId] = self.viewId;
+        tmpArgs[kTEPMethodArgsKeyEventId] = @(EvtID);
         if (param != nil) {
-            tmpArgs[kMethodArgsKeyParam] = param;
+            tmpArgs[kTEPMethodArgsKeyParam] = param;
         }
 
         NSDictionary *args = [NSDictionary dictionaryWithDictionary:tmpArgs];
         
-        [self.methodChannel invokeMethod:kCallbackMethodTCEffectAnimViewEvent
+        [self.methodChannel invokeMethod:kTEPCallbackMethodTCEffectAnimViewEvent
                                arguments:args];
     }
     
@@ -573,12 +573,12 @@
     NSString *tag = context[TCEPContextSourceTypeImageURL];
     NSDictionary *cacheItem = self.loadImageCache[tag];
     if (cacheItem != nil) {
-        NSNumber *imageType = cacheItem[kMethodArgsKeyImageType];
+        NSNumber *imageType = cacheItem[kTEPMethodArgsKeyImageType];
         if (imageType == nil) {
             completionBlock(nil, [NSError errorWithDomain:@"TCEffectPlayer" code:-2 userInfo:@{NSLocalizedDescriptionKey: @"Image type is required"}]);
             return;
         }
-        NSString *imageValue = cacheItem[kMethodArgsKeyImageValue];
+        NSString *imageValue = cacheItem[kTEPMethodArgsKeyImageValue];
         if (imageValue == nil) {
             completionBlock(nil, [NSError errorWithDomain:@"TCEffectPlayer" code:-3 userInfo:@{NSLocalizedDescriptionKey: @"Image value is required"}]);
             return;
@@ -646,8 +646,8 @@
  * -param tag   resource tag
  */
 - (void)tcePlayerTagTouchBegan:(ITCEffectPlayer *)player tag:(NSString *)tag {
-    [self.methodChannel invokeMethod:kCallbackMethodTCEffectAnimViewClickEvent
-                           arguments:@{kMethodArgsKeyViewId: self.viewId}];
+    [self.methodChannel invokeMethod:kTEPCallbackMethodTCEffectAnimViewClickEvent
+                           arguments:@{kTEPMethodArgsKeyViewId: self.viewId}];
 }
 
 /**
@@ -658,8 +658,8 @@
  * -param player    effect player
  */
 - (void)tcePlayerStart:(ITCEffectPlayer *)player {
-    [self.methodChannel invokeMethod:kCallbackMethodTCEffectAnimViewStart
-                           arguments:@{kMethodArgsKeyViewId: self.viewId}];
+    [self.methodChannel invokeMethod:kTEPCallbackMethodTCEffectAnimViewStart
+                           arguments:@{kTEPMethodArgsKeyViewId: self.viewId}];
 }
 
 /**
@@ -670,8 +670,8 @@
  * -param player   effect player
  */
 - (void)tcePlayerEnd:(ITCEffectPlayer *)player {
-    [self.methodChannel invokeMethod:kCallbackMethodTCEffectAnimViewEnd
-                           arguments:@{kMethodArgsKeyViewId: self.viewId}];
+    [self.methodChannel invokeMethod:kTEPCallbackMethodTCEffectAnimViewEnd
+                           arguments:@{kTEPMethodArgsKeyViewId: self.viewId}];
 }
 
 
@@ -686,7 +686,7 @@
  */
 - (void)tcePlayerError:(ITCEffectPlayer *)player error:(NSError *)error {
     NSMutableDictionary *tmpArgs = [[NSMutableDictionary alloc]init];
-    tmpArgs[kMethodArgsKeyViewId] = self.viewId;
+    tmpArgs[kTEPMethodArgsKeyViewId] = self.viewId;
     
     if (error != nil) {
         NSMutableDictionary *editErrorDict = [[NSMutableDictionary alloc]init];
@@ -697,11 +697,11 @@
         if (error.userInfo != nil) {
             editErrorDict[@"userInfo"] = error.userInfo;
         }
-        tmpArgs[kMethodArgsKeyTCEPlayerError] = [[NSDictionary alloc]initWithDictionary:editErrorDict];
+        tmpArgs[kTEPMethodArgsKeyTCEPlayerError] = [[NSDictionary alloc]initWithDictionary:editErrorDict];
     }
 
     NSDictionary *args = [NSDictionary dictionaryWithDictionary:tmpArgs];
-    [self.methodChannel invokeMethod:kCallbackMethodTCEffectAnimViewError
+    [self.methodChannel invokeMethod:kTEPCallbackMethodTCEffectAnimViewError
                            arguments:args];
 }
 

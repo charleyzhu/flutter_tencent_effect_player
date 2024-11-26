@@ -45,9 +45,9 @@ class TencentEffectImageModel {
   // to json
   Map<String, dynamic> toJson() {
     return {
-      kMethodArgsKeyImageType: imageType.value,
-      kMethodArgsKeyTag: tag,
-      kMethodArgsKeyImageValue: imageValue,
+      kTEPMethodArgsKeyImageType: imageType.value,
+      kTEPMethodArgsKeyTag: tag,
+      kTEPMethodArgsKeyImageValue: imageValue,
     };
   }
 }

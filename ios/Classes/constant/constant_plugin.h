@@ -21,7 +21,7 @@
 #define kChannelNamePrefix @"tencent_effect_player_view_channel_"
 
 /// 授权检查成功
-#define kCallbackMethodLicenseCheckSuccess @"LicenseCheckSuccessCallback"
+#define kTEPCallbackMethodLicenseCheckSuccess @"LicenseCheckSuccessCallback"
 
 /// 授权检查错误
-#define kCallbackMethodLicenseCheckError @"LicenseCheckErrorCallback" 
+#define kTEPCallbackMethodLicenseCheckError @"LicenseCheckErrorCallback" 

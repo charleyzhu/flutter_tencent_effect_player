@@ -3,7 +3,7 @@
  * @Date: 2024-11-08 10:47:25
  * @Description: In User Settings Edit
  * @FilePath: /tencent_effect_player/lib/tencent_effect_player_method_channel.dart
- * @LastEditTime: 2024-11-15 15:41:17
+ * @LastEditTime: 2024-11-26 15:13:12
  * @LastEditors: Charley
  */
 import 'package:flutter/foundation.dart';
@@ -27,7 +27,7 @@ class MethodChannelTencentEffectPlayer extends TencentEffectPlayerPlatform {
 
   @override
   Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>(kMethodGetSDKVersion);
+    final version = await methodChannel.invokeMethod<String>(kTEPMethodGetSDKVersion);
     return version;
   }
 
@@ -39,20 +39,20 @@ class MethodChannelTencentEffectPlayer extends TencentEffectPlayerPlatform {
       bool isLogEnable = false,
       TencentEffectInitCallback? licenseCheckCallback}) async {
     this.licenseCheckCallback = licenseCheckCallback;
-    await methodChannel.invokeMethod<dynamic>(kMethodInitSDK, {
-      kMethodArgsKeyLicenceUrl: licenceUrl,
-      kMethodArgsKeyLicenceKey: licenceKey,
-      kMethodArgsKeyIsLogEnable: isLogEnable,
+    await methodChannel.invokeMethod<dynamic>(kTEPMethodInitSDK, {
+      kTEPMethodArgsKeyLicenceUrl: licenceUrl,
+      kTEPMethodArgsKeyLicenceKey: licenceKey,
+      kTEPMethodArgsKeyIsLogEnable: isLogEnable,
     });
   }
 
   /// 方法调用处理回调
   Future<dynamic> methodCallHandlerCallBack(MethodCall call) async {
-    if (call.method == kCallbackMethodLicenseCheckSuccess) {
+    if (call.method == kTEPCallbackMethodLicenseCheckSuccess) {
       licenseCheckCallback?.call(LicenseCheckCallbackModel(status: LicenseStatus.success));
-    } else if (call.method == kCallbackMethodLicenseCheckError) {
-      final int? errCode = call.arguments[kMethodArgsKeyErrCode];
-      final dynamic param = call.arguments[kMethodArgsKeyParam];
+    } else if (call.method == kTEPCallbackMethodLicenseCheckError) {
+      final int? errCode = call.arguments[kTEPMethodArgsKeyErrCode];
+      final dynamic param = call.arguments[kTEPMethodArgsKeyParam];
       LicenseCheckCallbackErrorModel error = LicenseCheckCallbackErrorModel(errcode: errCode ?? 0, param: param);
       licenseCheckCallback?.call(LicenseCheckCallbackModel(status: LicenseStatus.fail, error: error));
     }

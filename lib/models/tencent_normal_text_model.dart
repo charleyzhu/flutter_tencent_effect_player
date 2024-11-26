@@ -22,8 +22,8 @@ class TencentNormalTextModel {
   // to json
   Map<String, dynamic> toJson() {
     return {
-      kMethodArgsKeyTag: tag,
-      kMethodArgsKeyText: text,
+      kTEPMethodArgsKeyTag: tag,
+      kTEPMethodArgsKeyText: text,
     };
   }
 }

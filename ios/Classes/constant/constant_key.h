@@ -1,3 +1,11 @@
+/*
+ * @Author: Charley
+ * @Date: 2024-11-12 10:11:29
+ * @Description: In User Settings Edit
+ * @FilePath: /tencent_effect_player/ios/Classes/constant/constant_key.h
+ * @LastEditTime: 2024-11-26 15:19:29
+ * @LastEditors: Charley
+ */
 /**
  * @Author: Charley
  * @Description: 键值相关常量
@@ -10,79 +18,79 @@
 #define kMethodInitSDK @"initSDK"
 
 /// licenceUrl
-#define kMethodArgsKeyLicenceUrl @"licenceUrl"
+#define kTEPMethodArgsKeyLicenceUrl @"licenceUrl"
 
 /// licenceKey
-#define kMethodArgsKeyLicenceKey @"licenceKey"
+#define kTEPMethodArgsKeyLicenceKey @"licenceKey"
 
 /// isLogEnable
-#define kMethodArgsKeyIsLogEnable @"isLogEnable"
+#define kTEPMethodArgsKeyIsLogEnable @"isLogEnable"
 
 /// 错误码
-#define kMethodArgsKeyErrCode @"errCode"
+#define kTEPMethodArgsKeyErrCode @"errCode"
 
 /// 参数
-#define kMethodArgsKeyParam @"param"
+#define kTEPMethodArgsKeyParam @"param"
 
 /// loop
-#define kMethodArgsKeyLoop @"loop"
+#define kTEPMethodArgsKeyLoop @"loop"
 
 /// mute
-#define kMethodArgsKeyMute @"mute"
+#define kTEPMethodArgsKeyMute @"mute"
 
 /// status
-#define kMethodArgsKeyStatus @"status"
+#define kTEPMethodArgsKeyStatus @"status"
 
 /// playUrlKey
-#define kMethodArgsKeyPlayUrl @"playUrl"
+#define kTEPMethodArgsKeyPlayUrl @"playUrl"
 
 /// playPath
-#define kMethodArgsKeyResourcePath @"playPath"
+#define kTEPMethodArgsKeyResourcePath @"playPath"
 
 /// playAsset
-#define kMethodArgsKeyAssetName @"playAsset"
+#define kTEPMethodArgsKeyAssetName @"playAsset"
 
 /// autoStart
-#define kMethodArgsKeyAutoStart @"autoStart"
+#define kTEPMethodArgsKeyAutoStart @"autoStart"
 
 /// isLoop
-#define kMethodArgsKeyIsLoop @"isLoop"
+#define kTEPMethodArgsKeyIsLoop @"isLoop"
 
 /// viewId
-#define kMethodArgsKeyViewId @"viewId"
+#define kTEPMethodArgsKeyViewId @"viewId"
 
 /// message
-#define kMethodArgsKeyMessage @"message"
+#define kTEPMethodArgsKeyMessage @"message"
 
 /// success
-#define kMethodArgsValueSuccess @"success"
+#define kTEPMethodArgsValueSuccess @"success"
 
 /// error
-#define kMethodArgsValueError @"error"
+#define kTEPMethodArgsValueError @"error"
 
 /// tag
-#define kMethodArgsKeyTag @"tag" 
+#define kTEPMethodArgsKeyTag @"tag" 
 
 /// text
-#define kMethodArgsKeyText @"text"
+#define kTEPMethodArgsKeyText @"text"
 
 /// isBold
-#define kMethodArgsKeyIsBold @"isBold"
+#define kTEPMethodArgsKeyIsBold @"isBold"
 
 /// alignment
-#define kMethodArgsKeyAlignment @"alignment"
+#define kTEPMethodArgsKeyAlignment @"alignment"
 
 /// textColor
-#define kMethodArgsKeyTextColor @"textColor"
+#define kTEPMethodArgsKeyTextColor @"textColor"
 
 /// imageType
-#define kMethodArgsKeyImageType @"imageType"
+#define kTEPMethodArgsKeyImageType @"imageType"
 
 /// imageValue
-#define kMethodArgsKeyImageValue @"imageValue"
+#define kTEPMethodArgsKeyImageValue @"imageValue"
 
 /// tcePlayerError
-#define kMethodArgsKeyTCEPlayerError @"tcePlayerError"
+#define kTEPMethodArgsKeyTCEPlayerError @"tcePlayerError"
 
 /// eventId
-#define kMethodArgsKeyEventId @"eventId"
+#define kTEPMethodArgsKeyEventId @"eventId"

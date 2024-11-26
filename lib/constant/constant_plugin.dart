@@ -11,7 +11,7 @@ const String kChannelNamePrefix = 'tencent_effect_player_view_channel_';
 const String kViewType = 'tencent_effect_player_view';
 
 /// 授权检查成功
-const String kCallbackMethodLicenseCheckSuccess = "LicenseCheckSuccessCallback";
+const String kTEPCallbackMethodLicenseCheckSuccess = "LicenseCheckSuccessCallback";
 
 /// 授权检查错误
-const String kCallbackMethodLicenseCheckError = "LicenseCheckErrorCallback";
+const String kTEPCallbackMethodLicenseCheckError = "LicenseCheckErrorCallback";

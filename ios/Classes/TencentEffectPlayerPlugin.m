@@ -45,9 +45,9 @@ static TencentEffectPlayerPlugin *_instance = nil;
         
         result([@"SDK Version " stringByAppendingString:[[TCMediaXBase getInstance] getSdkVersion]]);
     } else if ([kMethodInitSDK isEqualToString:call.method]) {
-        NSString *licenceUrl = call.arguments[kMethodArgsKeyLicenceUrl];
-        NSString *licenceKey = call.arguments[kMethodArgsKeyLicenceKey];
-        BOOL isLogEnable = [call.arguments[kMethodArgsKeyIsLogEnable] boolValue];
+        NSString *licenceUrl = call.arguments[kTEPMethodArgsKeyLicenceUrl];
+        NSString *licenceKey = call.arguments[kTEPMethodArgsKeyLicenceKey];
+        BOOL isLogEnable = [call.arguments[kTEPMethodArgsKeyIsLogEnable] boolValue];
         // 初始化SDK
         [self setLicenceURL:licenceUrl 
                 licenceKey:licenceKey
@@ -100,14 +100,14 @@ static TencentEffectPlayerPlugin *_instance = nil;
 - (void)onLicenseCheckCallback:(int)errcode withParam:(NSDictionary *)param {
 //    NSLog(@"onLicenseCheckCallback:%d", errcode);
     if (errcode == TMXLicenseCheckOk) {
-        [self.channel invokeMethod:kCallbackMethodLicenseCheckSuccess arguments:nil];
+        [self.channel invokeMethod:kTEPCallbackMethodLicenseCheckSuccess arguments:nil];
     }else {
         NSDictionary *args = @{
-            kMethodArgsKeyErrCode: @(errcode),
-            kMethodArgsKeyParam: param
+            kTEPMethodArgsKeyErrCode: @(errcode),
+            kTEPMethodArgsKeyParam: param
         };
 
-        [self.channel invokeMethod:kCallbackMethodLicenseCheckError arguments:args];
+        [self.channel invokeMethod:kTEPCallbackMethodLicenseCheckError arguments:args];
         
         if (errcode == TMXLicenseCheckDownloadError) {
             NSArray<NSString *> *bakeUpLicenseUrl = [self getBackupLicenseUrl];

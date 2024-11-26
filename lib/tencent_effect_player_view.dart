@@ -175,11 +175,11 @@ class _TencentEffectPlayerViewState extends State<TencentEffectPlayerView> {
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic> creationParams = <String, dynamic>{};
-    creationParams[kMethodArgsKeyPlayUrl] = widget.url;
-    creationParams[kMethodArgsKeyPlayPath] = widget.playPath;
-    creationParams[kMethodArgsKeyPlayAsset] = widget.playAsset;
-    creationParams[kMethodArgsKeyAutoStart] = widget.autoStart;
-    creationParams[kMethodArgsKeyIsLoop] = widget.isLoop;
+    creationParams[kTEPMethodArgsKeyPlayUrl] = widget.url;
+    creationParams[kTEPMethodArgsKeyPlayPath] = widget.playPath;
+    creationParams[kTEPMethodArgsKeyPlayAsset] = widget.playAsset;
+    creationParams[kTEPMethodArgsKeyAutoStart] = widget.autoStart;
+    creationParams[kTEPMethodArgsKeyIsLoop] = widget.isLoop;
 
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -236,108 +236,108 @@ class _TencentEffectPlayerViewState extends State<TencentEffectPlayerView> {
   }
 
   void initPlayerView() {
-    _channel.invokeMethod(kCallbackMethodInitPlayerView);
+    _channel.invokeMethod(kTEPCallbackMethodInitPlayerView);
   }
 
   Future<dynamic> methodCallHandler(MethodCall call) async {
-    if (call.method == kCallbackMethodTCEffectAnimViewEvent) {
+    if (call.method == kTEPCallbackMethodTCEffectAnimViewEvent) {
       // 事件通知
       if (call.arguments == null) {
         return null;
       }
-      final String? viewId = call.arguments[kMethodArgsKeyViewId];
+      final String? viewId = call.arguments[kTEPMethodArgsKeyViewId];
       if (viewId == null) {
         return null;
       }
-      final int? eventId = call.arguments[kMethodArgsKeyEventId];
+      final int? eventId = call.arguments[kTEPMethodArgsKeyEventId];
       if (eventId == null) {
         return null;
       }
-      final param = call.arguments[kMethodArgsKeyParam];
+      final param = call.arguments[kTEPMethodArgsKeyParam];
       widget.onEventNotification?.call(viewId, eventId, param);
-    } else if (call.method == kCallbackMethodTextContentForPlayer) {
+    } else if (call.method == kTEPCallbackMethodTextContentForPlayer) {
       if (widget.onTextContentForPlayer == null) {
         return null;
       }
       if (call.arguments == null) {
         return null;
       }
-      final String? viewId = call.arguments[kMethodArgsKeyViewId];
+      final String? viewId = call.arguments[kTEPMethodArgsKeyViewId];
       if (viewId == null) {
         return null;
       }
       // 替换融合动画资源配置中的文本占位符
       List<TencentNormalTextModel> textList = widget.onTextContentForPlayer!(viewId);
       return textList.map((e) => e.toJson()).toList();
-    } else if (call.method == kCallbackMethodLoadTextForPlayer) {
+    } else if (call.method == kTEPCallbackMethodLoadTextForPlayer) {
       if (widget.onLoadTextForPlayer == null) {
         return null;
       }
       if (call.arguments == null) {
         return null;
       }
-      final String? viewId = call.arguments[kMethodArgsKeyViewId];
+      final String? viewId = call.arguments[kTEPMethodArgsKeyViewId];
       if (viewId == null) {
         return null;
       }
       // 替换融合动画资源配置中的文本占位符
       List<TencentEffectTextModel> textList = widget.onLoadTextForPlayer!(viewId);
       return textList.map((e) => e.toJson()).toList();
-    } else if (call.method == kCallbackMethodLoadImageForPlayer) {
+    } else if (call.method == kTEPCallbackMethodLoadImageForPlayer) {
       if (widget.onLoadImageForPlayer == null) {
         return null;
       }
       if (call.arguments == null) {
         return null;
       }
-      final String? viewId = call.arguments[kMethodArgsKeyViewId];
+      final String? viewId = call.arguments[kTEPMethodArgsKeyViewId];
       if (viewId == null) {
         return null;
       }
       // 替换融合动画资源配置中的图片占位符
       List<TencentEffectImageModel> imageList = widget.onLoadImageForPlayer!(viewId);
       return imageList.map((e) => e.toJson()).toList();
-    } else if (call.method == kCallbackMethodTCEffectAnimViewClickEvent) {
+    } else if (call.method == kTEPCallbackMethodTCEffectAnimViewClickEvent) {
       if (call.arguments == null) {
         return null;
       }
-      final String? tag = call.arguments[kMethodArgsKeyTag];
+      final String? tag = call.arguments[kTEPMethodArgsKeyTag];
       if (tag == null) {
         return null;
       }
       // 融合动画资源点击事件
-      final String? viewId = call.arguments[kMethodArgsKeyViewId];
+      final String? viewId = call.arguments[kTEPMethodArgsKeyViewId];
       if (viewId == null) {
         return null;
       }
       widget.onTCEffectAnimViewClickEvent?.call(viewId, tag);
-    } else if (call.method == kCallbackMethodTCEffectAnimViewStart) {
+    } else if (call.method == kTEPCallbackMethodTCEffectAnimViewStart) {
       // 融合动画开始播放
       if (call.arguments == null) {
         return null;
       }
-      final String? viewId = call.arguments[kMethodArgsKeyViewId];
+      final String? viewId = call.arguments[kTEPMethodArgsKeyViewId];
       if (viewId == null) {
         return null;
       }
       widget.onTCEffectAnimViewStart?.call(viewId);
-    } else if (call.method == kCallbackMethodTCEffectAnimViewEnd) {
+    } else if (call.method == kTEPCallbackMethodTCEffectAnimViewEnd) {
       // 融合动画结束播放
       if (call.arguments == null) {
         return null;
       }
-      final String? viewId = call.arguments[kMethodArgsKeyViewId];
+      final String? viewId = call.arguments[kTEPMethodArgsKeyViewId];
       if (viewId == null) {
         return null;
       }
       widget.onTCEffectAnimViewEnd?.call(viewId);
-    } else if (call.method == kCallbackMethodTCEffectAnimViewError) {
+    } else if (call.method == kTEPCallbackMethodTCEffectAnimViewError) {
       // 融合动画播放错误
-      final String? viewId = call.arguments[kMethodArgsKeyViewId];
+      final String? viewId = call.arguments[kTEPMethodArgsKeyViewId];
       if (viewId == null) {
         return null;
       }
-      final Map? error = call.arguments[kMethodArgsKeyTCEPlayerError];
+      final Map? error = call.arguments[kTEPMethodArgsKeyTCEPlayerError];
       widget.onTCEffectAnimViewError?.call(viewId, error);
     }
     return null;
