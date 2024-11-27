@@ -3,10 +3,11 @@
  * @Date: 2024-11-08 10:47:25
  * @Description: In User Settings Edit
  * @FilePath: /tencent_effect_player/test/tencent_effect_player_test.dart
- * @LastEditTime: 2024-11-15 15:49:30
+ * @LastEditTime: 2024-11-27 14:25:48
  * @LastEditors: Charley
  */
 import 'package:flutter_test/flutter_test.dart';
+import 'package:tencent_effect_player/constant/constant.dart';
 import 'package:tencent_effect_player/tencent_effect_player.dart';
 import 'package:tencent_effect_player/tencent_effect_player_platform_interface.dart';
 import 'package:tencent_effect_player/tencent_effect_player_method_channel.dart';
