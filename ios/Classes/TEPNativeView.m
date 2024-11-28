@@ -114,18 +114,6 @@
 
         [self setupMethodChannelWithViewId:[NSString stringWithFormat:@"%lld", viewId] registrar:registrar];
         
-
-        /// 如果任何播放资源都没有，则抛出异常
-        if (self.playUrl == nil && self.resourcePath == nil && self.assetName == nil) {
-            NSLog(@"playUrl or resourcePath or assetName is required");
-            // 断言
-            NSAssert(self.playUrl != nil || self.resourcePath != nil || self.assetName != nil, @"playUrl or resourcePath or assetName is required");
-            // 抛出异常
-            @throw [NSException exceptionWithName:@"playUrl or resourcePath or assetName is required" reason:@"playUrl or resourcePath or assetName is required" userInfo:nil];
-        }
-
-        
-        
     }
     return self;
 }
