@@ -3,7 +3,7 @@
  * @Date: 2024-11-09 16:25:09
  * @Description: In User Settings Edit
  * @FilePath: /tencent_effect_player/lib/tencent_effect_player_controller.dart
- * @LastEditTime: 2024-11-26 15:16:01
+ * @LastEditTime: 2024-11-28 15:13:51
  * @LastEditors: Charley
  */
 
@@ -11,7 +11,7 @@ import 'package:flutter/services.dart';
 import 'constant/constant.dart';
 
 class TencentEffectPlayerController {
-  TencentEffectPlayerController({required String viewId}) : _channel = MethodChannel(viewId);
+  TencentEffectPlayerController({required String viewId}) : _channel = MethodChannel('$kChannelNamePrefix$viewId');
 
   final MethodChannel _channel;
 
@@ -27,7 +27,8 @@ class TencentEffectPlayerController {
 
   /// 播放资源
   Future<Map<dynamic, dynamic>?> playWithAsset({required String asset, bool isMute = false}) async {
-    return _channel.invokeMethod(kTEPCallbackMethodPlayWithAsset, {kTEPMethodArgsKeyPlayAsset: asset, "isMute": isMute});
+    return _channel
+        .invokeMethod(kTEPCallbackMethodPlayWithAsset, {kTEPMethodArgsKeyPlayAsset: asset, "isMute": isMute});
   }
 
   ///   暂停播放

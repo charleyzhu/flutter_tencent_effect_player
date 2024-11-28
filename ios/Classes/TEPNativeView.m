@@ -79,6 +79,10 @@
         
         _viewId = [NSString stringWithFormat:@"%lld",viewId];
 
+        if (args[kTEPMethodArgsKeyViewId] != nil) {
+            self.viewId = args[kTEPMethodArgsKeyViewId];
+        }
+
         // 初始化缓存
         self.textContentCache = [NSMutableDictionary dictionary];
         self.loadTextCache = [NSMutableDictionary dictionary];

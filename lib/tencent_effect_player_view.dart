@@ -180,6 +180,10 @@ class _TencentEffectPlayerViewState extends State<TencentEffectPlayerView> {
     creationParams[kTEPMethodArgsKeyPlayAsset] = widget.playAsset;
     creationParams[kTEPMethodArgsKeyAutoStart] = widget.autoStart;
     creationParams[kTEPMethodArgsKeyIsLoop] = widget.isLoop;
+    if (widget.viewId != null) {
+      final String viewId = '$kChannelNamePrefix${widget.viewId}';
+      creationParams[kTEPMethodArgsKeyViewId] = viewId;
+    }
 
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
