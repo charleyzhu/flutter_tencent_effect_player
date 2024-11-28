@@ -181,8 +181,7 @@ class _TencentEffectPlayerViewState extends State<TencentEffectPlayerView> {
     creationParams[kTEPMethodArgsKeyAutoStart] = widget.autoStart;
     creationParams[kTEPMethodArgsKeyIsLoop] = widget.isLoop;
     if (widget.viewId != null) {
-      final String viewId = '$kChannelNamePrefix${widget.viewId}';
-      creationParams[kTEPMethodArgsKeyViewId] = viewId;
+      creationParams[kTEPMethodArgsKeyViewId] = widget.viewId;
     }
 
     switch (defaultTargetPlatform) {
