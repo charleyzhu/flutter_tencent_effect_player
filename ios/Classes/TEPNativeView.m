@@ -220,7 +220,7 @@
                          arguments:args 
                            result:^(id _Nullable result) {
         dispatch_async(queue, ^{
-            NSLog(@"加载普通文本缓存");
+            // NSLog(@"加载普通文本缓存");
             if (result != nil) {
                 NSArray<NSDictionary *> *textList = result;
                 if (textList != nil && textList.count > 0) {
@@ -239,7 +239,7 @@
                          arguments:args 
                            result:^(id _Nullable result) {
         dispatch_async(queue, ^{
-            NSLog(@"加载特效文本缓存");
+            // NSLog(@"加载特效文本缓存");
             if (result != nil) {
                 NSArray<NSDictionary *> *textList = result;
                 if (textList != nil && textList.count > 0) {
@@ -279,7 +279,7 @@
                          arguments:args 
                            result:^(id _Nullable result) {
         dispatch_async(queue, ^{
-            NSLog(@"加载图片缓存");
+            // NSLog(@"加载图片缓存");
             if (result != nil) {
                 NSArray<NSDictionary *> *imageList = result;
                 if (imageList != nil && imageList.count > 0) {
