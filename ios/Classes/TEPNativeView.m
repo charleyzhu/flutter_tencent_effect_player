@@ -80,7 +80,7 @@
         _viewId = [NSString stringWithFormat:@"%lld",viewId];
 
         if (args[kTEPMethodArgsKeyViewId] != nil) {
-            self.viewId = args[kTEPMethodArgsKeyViewId];
+            _viewId = args[kTEPMethodArgsKeyViewId];
         }
 
         // 初始化缓存
@@ -116,7 +116,7 @@
         // 初始化视图
         [self setupViewWithFrame:frame];
 
-        [self setupMethodChannelWithViewId:[NSString stringWithFormat:@"%lld", viewId] registrar:registrar];
+        [self setupMethodChannelWithViewId:_viewId registrar:registrar];
         
     }
     return self;
