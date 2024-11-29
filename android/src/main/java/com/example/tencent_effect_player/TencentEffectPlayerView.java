@@ -97,7 +97,11 @@ public class TencentEffectPlayerView implements PlatformView, MethodChannel.Meth
         mPlayerView = new TCEffectAnimView(context);
         MethodChannel.MethodCallHandler handler = this;
         viewId = id + "";
-        String channelViewId = TencentEffectPlayerPlugin._viewChannel + id;
+        if (creationParams.containsKey(_argumentViewId)) {
+            viewId = (String) creationParams.get(_argumentViewId);
+        }
+
+        String channelViewId = TencentEffectPlayerPlugin._viewChannel + viewId;
         channel = new MethodChannel(binaryMessenger, channelViewId);
         channel.setMethodCallHandler(handler);
         this.context = context;
