@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.tencent.tcmediax.tceffectplayer.api.TCEffectAnimView;
+import com.tencent.tcmediax.tceffectplayer.api.TCEffectPlayerConstant;
 import com.tencent.tcmediax.tceffectplayer.api.data.TCEffectText;
 import com.tencent.tcmediax.tceffectplayer.api.mix.IFetchResource;
 import com.tencent.tcmediax.tceffectplayer.api.mix.IFetchResourceImgResult;
@@ -124,10 +125,10 @@ public class TencentEffectPlayerView implements PlatformView, MethodChannel.Meth
             }
         }
 
-        /// 如果任何播放资源都没有，则抛出异常
-        if (playUrl == null && playPath == null && playAsset == null) {
-            throw new RuntimeException("No play resource");
-        }
+//        /// 如果任何播放资源都没有，则抛出异常
+//        if (playUrl == null && playPath == null && playAsset == null) {
+//            throw new RuntimeException("No play resource");
+//        }
 
     }
 
@@ -161,6 +162,7 @@ public class TencentEffectPlayerView implements PlatformView, MethodChannel.Meth
                 playUrl = call.argument(_argumentPlayUrl);
                 boolean playerUrlMute = Boolean.TRUE.equals(call.argument(_argumentMute));
                 setMute(playerUrlMute);
+                mPlayerView.setScaleType(TCEffectPlayerConstant.ScaleType.CENTER_CROP);
                 playWithUrl(playUrl);
                 break;
             case _methodPlayWithPath:
@@ -168,6 +170,7 @@ public class TencentEffectPlayerView implements PlatformView, MethodChannel.Meth
                 playPath = call.argument(_argumentPlayPath);
                 boolean playerPathMute = Boolean.TRUE.equals(call.argument(_argumentMute));
                 setMute(playerPathMute);
+                mPlayerView.setScaleType(TCEffectPlayerConstant.ScaleType.CENTER_CROP);
                 playWithPath(playPath);
                 break;
             case _methodPlayWithAsset:
@@ -175,6 +178,7 @@ public class TencentEffectPlayerView implements PlatformView, MethodChannel.Meth
                 playAsset = call.argument(_argumentPlayAsset);
                 boolean playerAssetMute = Boolean.TRUE.equals(call.argument(_argumentMute));
                 setMute(playerAssetMute);
+                mPlayerView.setScaleType(TCEffectPlayerConstant.ScaleType.CENTER_CROP);
                 playWithAsset();
                 break;
             case _methodPause:
