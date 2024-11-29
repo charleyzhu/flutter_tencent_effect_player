@@ -227,7 +227,7 @@ class _TencentEffectPlayerViewState extends State<TencentEffectPlayerView> {
   void _onPlatformViewCreated(int id) {
     String viewId = '$kChannelNamePrefix$id';
     if (widget.viewId != null) {
-      viewId = '$kChannelNamePrefix$widget.viewId';
+      viewId = '$kChannelNamePrefix${widget.viewId}';
     }
     _channel = MethodChannel(viewId);
     _channel.setMethodCallHandler(methodCallHandler);
