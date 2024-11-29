@@ -95,6 +95,7 @@ public class TencentEffectPlayerPlugin implements FlutterPlugin, MethodCallHandl
                 initSDK(call, result);
                 break;
             default:
+                Log.d("PlayerView", "notImplemented "+call.method);
                 result.notImplemented();
                 break;
         }

@@ -125,11 +125,6 @@ public class TencentEffectPlayerView implements PlatformView, MethodChannel.Meth
             }
         }
 
-//        /// 如果任何播放资源都没有，则抛出异常
-//        if (playUrl == null && playPath == null && playAsset == null) {
-//            throw new RuntimeException("No play resource");
-//        }
-
     }
 
 
@@ -204,6 +199,7 @@ public class TencentEffectPlayerView implements PlatformView, MethodChannel.Meth
                 setLoop(loop);
                 break;
             default:
+                Log.d("PlayerView", "notImplemented " + call.method);
                 result.notImplemented();
                 break;
         }
@@ -275,6 +271,7 @@ public class TencentEffectPlayerView implements PlatformView, MethodChannel.Meth
 
     private void initPlayView() {
 
+        if (mPlayerView == null) return;
 
         mPlayerView.setLoop(isLoop);
         if (autoStart) {
@@ -404,7 +401,9 @@ public class TencentEffectPlayerView implements PlatformView, MethodChannel.Meth
 
     //播放本地资源
     private void playWithPath(String path) {
-        mPlayerView.startPlay(path);
+        if(mPlayerView!=null){
+            mPlayerView.startPlay(path);
+        }
     }
 
     //播放Asset文件
@@ -412,7 +411,9 @@ public class TencentEffectPlayerView implements PlatformView, MethodChannel.Meth
         // 获取 assets 文件的相对路径
         String assetPath = flutterAssets.getAssetFilePathByName(playAsset);
         String path = FileUtils.copyAssetToStorage(context, assetPath);
-        mPlayerView.startPlay(path);
+        if(mPlayerView!=null){
+            mPlayerView.startPlay(path);
+        }
     }
 
     //暂停播放
