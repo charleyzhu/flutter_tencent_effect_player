@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'constant/constant.dart';
@@ -188,6 +190,10 @@ class _TencentEffectPlayerViewState extends State<TencentEffectPlayerView> {
       case TargetPlatform.android:
         final androidView = AndroidView(
           viewType: kViewType,
+          hitTestBehavior: PlatformViewHitTestBehavior.transparent,
+          gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+            Factory<TapGestureRecognizer>(() => TapGestureRecognizer()),
+          },
           creationParams: creationParams,
           layoutDirection: TextDirection.ltr,
           onPlatformViewCreated: _onPlatformViewCreated,
@@ -205,6 +211,10 @@ class _TencentEffectPlayerViewState extends State<TencentEffectPlayerView> {
       case TargetPlatform.iOS:
         final iosView = UiKitView(
           viewType: kViewType,
+          hitTestBehavior: PlatformViewHitTestBehavior.transparent,
+          gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+            Factory<TapGestureRecognizer>(() => TapGestureRecognizer()),
+          },
           layoutDirection: TextDirection.ltr,
           onPlatformViewCreated: _onPlatformViewCreated,
           creationParams: creationParams,
