@@ -51,7 +51,7 @@ android {
         testImplementation("org.mockito:mockito-core:5.0.0")
         // implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
         // implementation(name: 'LiteAVSDK_Player_Mini', ext: 'aar')
-        implementation 'com.tencent.liteav:LiteAVSDK_Professional:12.2.0.15065'
+        implementation 'com.tencent.liteav:LiteAVSDK_Professional:12.2.0.15072'
         implementation(name: 'TCEffectPlayer_2.1.0.145', ext: 'aar')
         implementation(name: 'TCMediaX_2.1.0.145', ext: 'aar')
         implementation 'com.jakewharton:disklrucache:2.0.2'
